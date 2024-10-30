@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:lightning="https://opendata.smhi.se/xsd/lightning_v1.xsd" xmlns:portal="https://opendata.smhi.se/xsd/portal.xsd" targetNamespace="https://opendata.smhi.se/xsd/lightning_v1.xsd" elementFormDefault="qualified"
+  attributeFormDefault="unqualified">
+
+  <xs:import namespace="https://opendata.smhi.se/xsd/portal.xsd" schemaLocation="https://opendata.smhi.se/xsd/portal.xsd" />
+
+  <!-- LIGHTNING YEAR -->
+  <xs:element name="lightningYear">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="key" type="xs:string" />
+        <xs:element name="title" type="xs:string" />
+        <xs:element name="summary" type="xs:string" />
+        <xs:element name="link" type="portal:linkType" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="month" type="portal:linksType" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- LIGHTNING MONTH -->
+  <xs:element name="lightningMonth">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="key" type="xs:string" />
+        <xs:element name="title" type="xs:string" />
+        <xs:element name="summary" type="xs:string" />
+        <xs:element name="link" type="portal:linkType" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="day" type="portal:linksType" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- LIGHTNING DAY -->
+  <xs:element name="lightningDay">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="key" type="xs:string" />
+        <xs:element name="title" type="xs:string" />
+        <xs:element name="summary" type="xs:string" />
+        <xs:element name="link" type="portal:linkType" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="data" type="portal:linksType" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="lightningData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="values" type="lightning:lightningValueType" maxOccurs="unbounded" minOccurs="1" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="lightningValueType">
+    <xs:sequence>
+      <xs:element name="version" type="xs:int" maxOccurs="1" minOccurs="1" />
+      <xs:element name="year" type="xs:int" maxOccurs="1" minOccurs="1" />
+      <xs:element name="month" type="xs:int" maxOccurs="1" minOccurs="1" />
+      <xs:element name="day" type="xs:int" maxOccurs="1" minOccurs="1" />
+      <xs:element name="hours" type="xs:int" maxOccurs="1" minOccurs="1" />
+      <xs:element name="minutes" type="xs:int" maxOccurs="1" minOccurs="1" />
+      <xs:element name="seconds" type="xs:int" maxOccurs="1" minOccurs="1" />
+      <xs:element name="nanoseconds" type="xs:int" maxOccurs="1" minOccurs="1" />
+      <xs:element name="lat" type="lightning:f4digits" maxOccurs="1" minOccurs="1" />
+      <xs:element name="lon" type="lightning:f4digits" maxOccurs="1" minOccurs="1" />
+      <xs:element name="peakCurrent" type="xs:int" maxOccurs="1" minOccurs="1" />
+      <xs:element name="multiplicity" type="xs:int" maxOccurs="1" minOccurs="1" />
+      <xs:element name="numberOfSensors" type="xs:int" maxOccurs="1" minOccurs="1" />
+      <xs:element name="degreesOfFreedom" type="xs:int" maxOccurs="1" minOccurs="1" />
+      <xs:element name="ellipseAngle" type="lightning:f2digits" maxOccurs="1" minOccurs="1" />
+      <xs:element name="semiMajorAxis" type="lightning:f2digits" maxOccurs="1" minOccurs="1" />
+      <xs:element name="semiMinorAxis" type="lightning:f2digits" maxOccurs="1" minOccurs="1" />
+      <xs:element name="chiSquareValue" type="lightning:f2digits" maxOccurs="1" minOccurs="1" />
+      <xs:element name="riseTime" type="lightning:f1digit" maxOccurs="1" minOccurs="1" />
+      <xs:element name="peakToZeroTime" type="lightning:f1digit" maxOccurs="1" minOccurs="1" />
+      <xs:element name="maxRateOfRise" type="lightning:f1digit" maxOccurs="1" minOccurs="1" />
+      <xs:element name="cloudIndicator" type="xs:int" maxOccurs="1" minOccurs="1" />
+      <xs:element name="angleIndicator" type="xs:int" maxOccurs="1" minOccurs="1" />
+      <xs:element name="signalIndicator" type="xs:int" maxOccurs="1" minOccurs="1" />
+      <xs:element name="timingIndicator" type="xs:int" maxOccurs="1" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="f4digits">
+    <xs:restriction base="xs:decimal">
+      <xs:fractionDigits value="4" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="f2digits">
+    <xs:restriction base="xs:decimal">
+      <xs:fractionDigits value="2" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="f1digit">
+    <xs:restriction base="xs:decimal">
+      <xs:fractionDigits value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

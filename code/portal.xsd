@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:portal="https://opendata.smhi.se/xsd/portal.xsd" targetNamespace="https://opendata.smhi.se/xsd/portal.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+  <xs:complexType name="geoBox">
+    <xs:sequence>
+      <xs:element name="minLatitude" type="xs:double" />
+      <xs:element name="minLongitude" type="xs:double" />
+      <xs:element name="maxLatitude" type="xs:double" />
+      <xs:element name="maxLongitude" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- LINK -->
+  <xs:complexType name="linkType">
+    <xs:attribute name="rel" type="xs:string" use="required" />
+    <xs:attribute name="type" type="xs:string" use="required" />
+    <xs:attribute name="href" type="xs:anyURI" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="linksType">
+    <xs:sequence>
+      <xs:element name="key" type="xs:string" minOccurs="0" />
+      <xs:element name="updated" type="xs:dateTime" />
+      <xs:element name="title" type="xs:string" />
+      <xs:element name="summary" type="xs:string" />
+      <xs:element name="link" type="portal:linkType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="geoLinksType">
+    <xs:complexContent>
+      <xs:extension base="portal:linksType">
+        <xs:sequence>
+          <xs:element name="geoBox" type="portal:geoBox">
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- API -->
+  <xs:element name="api">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="updated" type="xs:dateTime" />
+        <xs:element name="title" type="xs:string" />
+        <xs:element name="summary" type="xs:string" />
+        <xs:element name="link" type="portal:linkType" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="category" type="portal:linksType" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- CATEGORY -->
+  <xs:element name="category">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="key" type="xs:string" />
+        <xs:element name="updated" type="xs:dateTime" />
+        <xs:element name="title" type="xs:string" />
+        <xs:element name="summary" type="xs:string" />
+        <xs:element name="link" type="portal:linkType" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="version" type="portal:linksType" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- VERSION -->
+  <xs:element name="version">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="key" type="xs:string" />
+        <xs:element name="updated" type="xs:dateTime" />
+        <xs:element name="title" type="xs:string" />
+        <xs:element name="summary" type="xs:string" />
+        <xs:element name="link" type="portal:linkType" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="resource" type="portal:linksType" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

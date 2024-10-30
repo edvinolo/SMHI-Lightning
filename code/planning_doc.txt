@@ -1,0 +1,18 @@
+Planning document for lightning data
+
+Goals:
+    [x] Download and read lightning data from SMHI API
+    [] Find nice ways to vizualize the data
+        [X] Plot the number of strikes as function of day of year
+        [x] Map of all strikes and neighbor count
+        [] Calculate number of days with lightning strikes for major cities
+    [x] Find out if a model can be trained to predict cloud-to-cloud or cloud-to-ground discharge (prediction or classification?)
+        [] try to make a neural net!
+
+Problems:
+    [](?) Speed of neighbors calculation for large data sets. Chunks seem to work the best on this computer.
+    [] Neighbor count is of by 1 between loop and array_trickery for certain data points, currently not clear what is causing this to happen
+
+To do:
+    [] Clean up, and document/comment code
+    [] Separate code into modules
